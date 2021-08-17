@@ -19,7 +19,8 @@ dotfiles_repo_local_destination: ~/Developer/dotfiles
 dotfiles_files:
   - .gitignore
   - .gitconfig
-
+dotfiles_folder:
+  - starship.toml
 homebrew_installed_packages:
   - git
 
