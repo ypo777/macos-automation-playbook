@@ -2,11 +2,31 @@
 downloads: ~/.ansible-downloads/
 
 configure_dotfiles: true
-configure_osx: false
+configure_osx: true
 
-configure_dock: false
-dockitems_remove: []
-dockitems_persist: []
+configure_dock: true
+dockitems_remove:
+  - Launchpad
+  - TV
+  - Safari
+  - Maps
+  - FaceTime
+  - Calendar
+  - Contacts
+  - Reminders
+  - Notes
+  - Music
+  - Podcasts
+  - News
+  - 'App Store'
+
+dockitems_persist:
+  - name: "Firefox"
+    path: "/Applications/Firefox.app"
+    pos: 2
+  - name: "Alacritty"
+    path: "/Applications/Alacritty.app"
+    pos: 5
 
 configure_sudoers: true
 sudoers_custom_config: |
@@ -32,5 +52,19 @@ mas_installed_apps: []
 mas_email: ""
 mas_password: ""
 
+osx_script: "~/.macos --no-restart"
+
+
+composer_packages: []
+
+gem_packages: []
+
+npm_packages: []
+
+pip_packages:
+  - name: scikit-learn
+    state: latest
+  - name: pandas
+    state: latest
 
 post_provision_tasks: []
