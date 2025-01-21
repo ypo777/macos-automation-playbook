@@ -18,14 +18,15 @@ dockitems_remove:
   - Music
   - Podcasts
   - News
-  - 'App Store'
+  - "App Store"
+  - Freeform
 
 dockitems_persist:
-  - name: "Firefox"
-    path: "/Applications/Firefox.app"
+  - name: "Firefox Developer Edition"
+    path: "/Applications/Firefox Developer Edition.app"
     pos: 2
-  - name: "Alacritty"
-    path: "/Applications/Alacritty.app"
+  - name: "Ghostty"
+    path: "/Applications/Ghostty.app"
     pos: 5
 
 configure_sudoers: true
@@ -43,10 +44,14 @@ dotfiles_folder:
   - starship.toml
 homebrew_installed_packages:
   - git
+  - firefox@developer-edition
+  - google-chrome
+  - alt-tab
+  - shottr
+  - iina
+  - motrix
 
-homebrew_taps:
-  - homebrew/core
-  - homebrew/cask
+homebrew_taps: []
 
 mas_installed_apps: []
 mas_email: ""
@@ -54,17 +59,12 @@ mas_password: ""
 
 osx_script: "~/.macos --no-restart"
 
-
 composer_packages: []
 
 gem_packages: []
 
 npm_packages: []
 
-pip_packages:
-  - name: scikit-learn
-    state: latest
-  - name: pandas
-    state: latest
+pip_packages: []
 
 post_provision_tasks: []
