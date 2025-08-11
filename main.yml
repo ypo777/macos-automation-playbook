@@ -11,6 +11,10 @@
         - "{{ playbook_dir }}/config.yml"
       tags: ['always']
 
+    - import_tasks: tasks/dotfiles-prep.yml
+      when: configure_dotfiles
+      tags: ['dotfiles', 'dotfiles-prep']
+
   roles:
     - role: elliotweiser.osx-command-line-tools
     - role: geerlingguy.mac.homebrew

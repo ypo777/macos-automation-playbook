@@ -1,0 +1,15 @@
+---
+- name: Set fish as default shell
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /opt/homebrew/bin/fish
+  tags: ['fish']
+
+- name: Ensure fish is in /etc/shells
+  become: true
+  lineinfile:
+    path: /etc/shells
+    line: /opt/homebrew/bin/fish
+    state: present
+  tags: ['fish']

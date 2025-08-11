@@ -11,7 +11,6 @@ dockitems_remove:
   - Safari
   - Maps
   - FaceTime
-  - Calendar
   - Contacts
   - Reminders
   - Notes
@@ -37,19 +36,36 @@ sudoers_custom_config: |
 dotfiles_repo: https://github.com/ypo777/dotfiles.git
 dotfiles_repo_accept_hostkey: true
 dotfiles_repo_local_destination: ~/Developer/dotfiles
+dotfiles_repo_version: main
+dotfiles_repo_force: true
 dotfiles_files:
   - .gitignore
   - .gitconfig
 dotfiles_folder:
-  - starship.toml
+  - nvim
+  - tmux
+  - fish
 homebrew_installed_packages:
   - git
+  - tmux
+  - fish
+  - neovim
   - firefox@developer-edition
   - google-chrome
   - alt-tab
   - shottr
-  - iina
   - motrix
+  - dbeaver-community
+  - spotify
+  - obs
+  - pearcleaner
+  - notion
+  - fork
+  - claude
+  - discord
+  - jordanbaird-ice
+  - raspberry-pi-imager
+  - mise
 
 homebrew_taps: []
 
@@ -67,4 +83,5 @@ npm_packages: []
 
 pip_packages: []
 
-post_provision_tasks: []
+post_provision_tasks:
+  - "{{ playbook_dir }}/tasks/fish-setup.yml"
