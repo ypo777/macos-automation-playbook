@@ -1,0 +1,33 @@
+---
+- name: Check if Amethyst is installed
+  command: brew list amethyst
+  register: amethyst_installed
+  failed_when: false
+  changed_when: false
+  tags: ['amethyst']
+
+- name: Ensure Amethyst Application Support directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Application Support/Amethyst"
+    state: directory
+    mode: '0755'
+  when: amethyst_installed.rc == 0
+  tags: ['amethyst']
+
+- name: Ensure Amethyst Layouts directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/Library/Application Support/Amethyst/Layouts"
+    state: directory
+    mode: '0755'
+  when: amethyst_installed.rc == 0
+  tags: ['amethyst']
+
+- name: Copy Amethyst custom layouts from dotfiles
+  copy:
+    src: "{{ dotfiles_repo_local_destination }}/config/amethyst/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/Library/Application Support/Amethyst/Layouts/{{ item }}"
+    mode: '0644'
+  with_items:
+    - four-corner.js
+  when: amethyst_installed.rc == 0
+  tags: ['amethyst']

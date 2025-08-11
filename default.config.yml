@@ -50,6 +50,7 @@ homebrew_installed_packages:
   - tmux
   - fish
   - neovim
+  - amethyst
   - firefox@developer-edition
   - google-chrome
   - alt-tab
@@ -85,3 +86,4 @@ pip_packages: []
 
 post_provision_tasks:
   - "{{ playbook_dir }}/tasks/fish-setup.yml"
+  - "{{ playbook_dir }}/tasks/amethyst-config.yml"
