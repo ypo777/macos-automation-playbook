@@ -47,3 +47,28 @@
         loop_var: outer_item
       with_fileglob: "{{ post_provision_tasks|default(omit) }}"
       tags: ['post']
+
+  handlers:
+    - name: Restart Finder
+      become: false
+      command: killall Finder
+      failed_when: false
+      changed_when: false
+
+    - name: Restart Dock
+      become: false
+      command: killall Dock
+      failed_when: false
+      changed_when: false
+
+    - name: Restart SystemUIServer
+      become: false
+      command: killall SystemUIServer
+      failed_when: false
+      changed_when: false
+
+    - name: Restart WindowManager
+      become: false
+      command: killall WindowManager
+      failed_when: false
+      changed_when: false

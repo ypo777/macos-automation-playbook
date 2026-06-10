@@ -45,11 +45,13 @@ dotfiles_folder:
   - nvim
   - tmux
   - fish
+  - ghostty
 homebrew_installed_packages:
   - git
   - tmux
   - fish
   - neovim
+  - ghostty
   - amethyst
   - firefox@developer-edition
   - google-chrome
@@ -70,11 +72,60 @@ homebrew_installed_packages:
 
 homebrew_taps: []
 
-mas_installed_apps: []
+# App Store apps. You must be signed into the App Store manually first —
+# `mas` removed CLI sign-in, so mas_email/mas_password are no longer used.
+mas_installed_apps:
+  - { id: 1503446680, name: "PastePal" }
+  - { id: 1612708557, name: "Scaler Bandwidth Monitor" }
+  - { id: 6443975850, name: "SenPlayer" }
+  - { id: 1437809329, name: "Surfshark" }
+  - { id: 425424353, name: "The Unarchiver" }
 mas_email: ""
 mas_password: ""
 
-osx_script: "~/.macos --no-restart"
+# macOS settings applied via `defaults` (community.general.osx_defaults).
+# Add new toggles here; they are applied in tasks/macos.yml.
+osx_defaults:
+  # Appearance: auto switch light/dark with the system schedule.
+  - { key: AppleInterfaceStyleSwitchesAutomatically, type: bool, value: true }
+  # Keyboard: fast key repeat + short delay (great for vim).
+  - { key: KeyRepeat, type: int, value: 2 }
+  - { key: InitialKeyRepeat, type: int, value: 15 }
+  # Disable press-and-hold accent popover so key repeat works everywhere.
+  - { key: ApplePressAndHoldEnabled, type: bool, value: false }
+  # Show all filename extensions in Finder.
+  - { key: AppleShowAllExtensions, type: bool, value: true }
+  # Expand save/print panels by default.
+  - { key: NSNavPanelExpandedStateForSaveMode, type: bool, value: true }
+  - { key: PMPrintingExpandedStateForPrint, type: bool, value: true }
+  # Finder: show hidden files, path bar, status bar.
+  - { domain: com.apple.finder, key: AppleShowAllFiles, type: bool, value: true }
+  - { domain: com.apple.finder, key: ShowPathbar, type: bool, value: true }
+  - { domain: com.apple.finder, key: ShowStatusBar, type: bool, value: true }
+  # Finder: search the current folder by default (not whole Mac).
+  - { domain: com.apple.finder, key: FXDefaultSearchScope, type: string, value: SCcf }
+  # Finder: no warning when changing a file extension.
+  - { domain: com.apple.finder, key: FXEnableExtensionChangeWarning, type: bool, value: false }
+  # Screenshots: PNG, saved to ~/Screenshots.
+  - { domain: com.apple.screencapture, key: type, type: string, value: png }
+  - { domain: com.apple.screencapture, key: location, type: string, value: "~/Screenshots" }
+  # Stop .DS_Store litter on network and USB volumes.
+  - { domain: com.apple.desktopservices, key: DSDontWriteNetworkStores, type: bool, value: true }
+  - { domain: com.apple.desktopservices, key: DSDontWriteUSBStores, type: bool, value: true }
+  # Trackpad/mouse: disable "natural" scrolling (use traditional direction).
+  - { key: com.apple.swipescrolldirection, type: bool, value: false }
+  # Dock: medium icons (48) with magnification at max (128).
+  # tilesize/largesize are stored as floats by the Dock.
+  - { domain: com.apple.dock, key: tilesize, type: float, value: 48.0 }
+  - { domain: com.apple.dock, key: magnification, type: bool, value: true }
+  - { domain: com.apple.dock, key: largesize, type: float, value: 128.0 }
+  # Dock: genie minimize effect, minimize windows into the app icon.
+  - { domain: com.apple.dock, key: mineffect, type: string, value: genie }
+  - { domain: com.apple.dock, key: minimize-to-application, type: bool, value: true }
+  # Desktop & Stage Manager: only reveal desktop on wallpaper click in Stage
+  # Manager (not always); keep showing items on the desktop.
+  - { domain: com.apple.WindowManager, key: EnableStandardClickToShowDesktop, type: bool, value: false }
+  - { domain: com.apple.WindowManager, key: StandardHideDesktopIcons, type: bool, value: false }
 
 composer_packages: []
 

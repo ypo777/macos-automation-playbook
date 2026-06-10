@@ -1,5 +1,24 @@
 ---
-- name: Run .macos dotfiles.
-  command: "{{ osx_script }}"
-  become: true
-  changed_when: false
+# Per-user macOS settings via `defaults`. Runs as the login user (not root),
+# so values land in the user's domain. Add new toggles to `osx_defaults` below.
+- name: Apply macOS defaults.
+  become: false
+  community.general.osx_defaults:
+    domain: "{{ item.domain | default('NSGlobalDomain') }}"
+    key: "{{ item.key }}"
+    type: "{{ item.type }}"
+    value: "{{ item.value }}"
+    host: "{{ item.host | default(omit) }}"
+  loop: "{{ osx_defaults }}"
+  notify:
+    - Restart Finder
+    - Restart Dock
+    - Restart SystemUIServer
+    - Restart WindowManager
+
+- name: Ensure screenshots directory exists.
+  become: false
+  file:
+    path: "{{ lookup('env', 'HOME') }}/Screenshots"
+    state: directory
+    mode: "0755"
