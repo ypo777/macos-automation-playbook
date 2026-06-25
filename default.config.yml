@@ -48,27 +48,25 @@ dotfiles_folder:
   - ghostty
 homebrew_installed_packages:
   - git
-  - tmux
   - fish
   - neovim
   - ghostty
-  - amethyst
-  - firefox@developer-edition
   - google-chrome
-  - alt-tab
   - shottr
   - motrix
   - dbeaver-community
-  - spotify
-  - obs
   - pearcleaner
-  - notion
   - fork
   - claude
   - discord
   - jordanbaird-ice
-  - raspberry-pi-imager
   - mise
+  - iina
+  - finetune
+  - firefox
+  - bruno
+  - rectangle
+  - zed
 
 homebrew_taps: []
 
@@ -137,4 +135,3 @@ pip_packages: []
 
 post_provision_tasks:
   - "{{ playbook_dir }}/tasks/fish-setup.yml"
-  - "{{ playbook_dir }}/tasks/amethyst-config.yml"
