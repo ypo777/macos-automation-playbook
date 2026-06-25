@@ -133,5 +133,4 @@ npm_packages: []
 
 pip_packages: []
 
-post_provision_tasks:
-  - "{{ playbook_dir }}/tasks/fish-setup.yml"
+post_provision_tasks: []

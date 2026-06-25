@@ -4,6 +4,9 @@
   vars_files:
     - default.config.yml
 
+  environment:
+    PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+
   pre_tasks:
     - name: Include playbook configuration.
       include_vars: "{{ item }}"
@@ -11,21 +14,39 @@
         - "{{ playbook_dir }}/config.yml"
       tags: ['always']
 
-  roles:
-    - role: elliotweiser.osx-command-line-tools
-    - role: geerlingguy.mac.homebrew
+    - name: Ensure ~/.config directory exists
+      file:
+        path: "{{ lookup('env', 'HOME') }}/.config"
+        state: directory
+        mode: '0755'
+      tags: ['always']
+
+  tasks:
+    - import_role:
+        name: elliotweiser.osx-command-line-tools
+
+    - import_role:
+        name: geerlingguy.mac.homebrew
       tags: ['homebrew']
-    - role: geerlingguy.dotfiles
+
+    - import_role:
+        name: geerlingguy.dotfiles
       when: configure_dotfiles
       tags: ['dotfiles']
-    - role: geerlingguy.mac.mas
+
+    - import_tasks: tasks/fish-setup.yml
+      tags: ['fish']
+
+    - import_role:
+        name: geerlingguy.mac.mas
       when: mas_installed_apps
       tags: ['mas']
-    - role: geerlingguy.mac.dock
+
+    - import_role:
+        name: geerlingguy.mac.dock
       when: configure_dock
       tags: ['dock']
 
-  tasks:
     - import_tasks: tasks/sudoers.yml
       when: configure_sudoers
       tags: ['sudoers']
