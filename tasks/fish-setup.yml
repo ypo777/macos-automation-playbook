@@ -13,3 +13,17 @@
     name: "{{ ansible_user_id }}"
     shell: /opt/homebrew/bin/fish
   tags: ['fish']
+
+- name: Ensure fish conf.d directory exists
+  file:
+    path: "{{ ansible_env.HOME }}/.config/fish/conf.d"
+    state: directory
+    mode: '0755'
+  tags: ['fish']
+
+- name: Add Homebrew to fish PATH
+  copy:
+    dest: "{{ ansible_env.HOME }}/.config/fish/conf.d/homebrew.fish"
+    content: "eval (/opt/homebrew/bin/brew shellenv)\n"
+    mode: '0644'
+  tags: ['fish']
